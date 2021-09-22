@@ -7,10 +7,12 @@ public class EnemyBehaviour : MonoBehaviour
     public int hp = 3;
     public float speed = 3;
     GameObject player;
+    GameManager gm;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        gm = Camera.main.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -38,6 +40,10 @@ public class EnemyBehaviour : MonoBehaviour
         Destroy(collision.collider.gameObject);
         hp--;
         if (hp <= 0)
+        {
             Destroy(transform.gameObject);
+            gm.score += 100;
+        }
+            
     }
 }
