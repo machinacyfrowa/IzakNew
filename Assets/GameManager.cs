@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public int score = 0;
     public Text scoreCounter;
+    public GameObject enemyPrefab;
+
+    float spawnInterval = 3;
+    float timeSinceLastSpawn = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +21,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         scoreCounter.text = score.ToString();
+        timeSinceLastSpawn += Time.deltaTime;
+        if(timeSinceLastSpawn > spawnInterval)
+        {
+            Instantiate(enemyPrefab);
+            timeSinceLastSpawn = 0;
+        }
     }
 }
